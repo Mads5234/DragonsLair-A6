@@ -52,7 +52,7 @@ namespace TournamentTest
             int numberOfRounds = currentTournament.GetNumberOfRounds();
             for (int round = 0; round < numberOfRounds; round++)
             {
-                Round currentRound = currentTournament.GetRound(round);
+                Round currentRound = currentTournament.GetRound(round); 
                 if (currentRound.IsMatchesFinished() == false)
                     matchesFinished = false;
             }

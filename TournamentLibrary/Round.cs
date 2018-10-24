@@ -5,6 +5,7 @@ namespace TournamentLib
     public class Round
     {
         private List<Match> matches = new List<Match>();
+
         
         public void AddMatch(Match m)
         {
@@ -13,26 +14,58 @@ namespace TournamentLib
 
         public Match GetMatch(string teamName1, string teamName2)
         {
-            // TODO: Implement this method
-            return null;
+            Match mat = new Match();
+            foreach (Match m in matches)
+            {
+                if (m.FirstOpponent.ToString() == teamName1 && m.SecondOpponent.ToString() == teamName2)
+                {
+                    mat = m;
+                }
+            }
+            return mat;
         }
 
         public bool IsMatchesFinished()
         {
-            // TODO: Implement this method
-            return false;
+            for (int i = 0; i < matches.Count; i++)
+            {
+                if (matches[i].Winner == null)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public List<Team> GetWinningTeams()
         {
-            // TODO: Implement this method
-            return null;
+            List<Team> WinningTeams = new List<Team>();
+            for (int i = 0; i < matches.Count; i++)
+            {
+                WinningTeams.Add(matches[i].Winner);
+            }
+            return WinningTeams;
         }
 
         public List<Team> GetLosingTeams()
         {
-            // TODO: Implement this method
-            return null;
+            List<Team> LosingTeams = new List<Team>();
+            List<Team> WinningTeams = new List<Team>();
+            foreach (Match match in matches)
+            {
+                if (match.Winner == match.FirstOpponent)
+                {
+                    WinningTeams.Add(match.FirstOpponent);
+                    LosingTeams.Add(match.SecondOpponent);
+                }
+                else
+                {
+                    WinningTeams.Add(match.SecondOpponent);
+                    LosingTeams.Add(match.FirstOpponent);
+                }
+            }
+            return LosingTeams;
+            
         }
     }
 }
