@@ -9,13 +9,22 @@ namespace DragonsLair
     {
         private TournamentRepo tournamentRepository = new TournamentRepo();
 
+        public string score { get; private set; }
+
         public void ShowScore(string tournamentName)
         {
+            score += tournamentName;
+            ShowScore();
             /*
              * TODO: Calculate for each team how many times they have won
              * Sort based on number of matches won (descending)
              */
-            Console.WriteLine("Implement this method!");
+            Console.WriteLine("Score: " + tournamentName);
+        }
+
+        void ShowScore()
+        {
+           Console.WriteLine("Score: " + score);
         }
 
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
