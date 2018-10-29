@@ -22,6 +22,11 @@ namespace DragonsLair
             Console.WriteLine("Score:" + tournamentName);
         }
 
+        public TournamentRepo GetTournamentRepository()
+        {
+            throw new NotImplementedException();
+        }
+
         void ShowScore()
         {
            Console.WriteLine("Score:" + score);
