@@ -27,11 +27,6 @@ namespace DragonsLair
             throw new NotImplementedException();
         }
 
-        void ShowScore()
-        {
-           Console.WriteLine("Score:" + score);
-        }
-
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
         {
             // Do not implement this method
