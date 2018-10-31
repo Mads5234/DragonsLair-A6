@@ -54,12 +54,128 @@ namespace DragonsLair
 
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
         {
-            // Do not implement this method
+            Tournament t = tournamentRepository.GetTournament(tournamentName);
+            List<Team> teams = new List<Team>();
+            List<Team> scrambled = new List<Team>();
+            Round lastRound;
+            Round newRound;
+            Team oldFreeRider;
+            bool isRoundFinished;
+
+            int numberOfRounds = t.GetNumberOfRounds();
+
+            if (numberOfRounds == 0)
+            {
+                lastRound = null;
+                isRoundFinished = true;
+            }
+            else
+            {
+                lastRound = t.GetRound(numberOfRounds - 1);
+                isRoundFinished = lastRound.IsMatchesFinished();
+            }
+
+            if (isRoundFinished)
+            {
+                if (lastRound == null)
+                {
+                    teams = t.GetTeams().ToList();
+                }
+                else
+                {
+                    teams = lastRound.GetWinningTeams();
+                    if (lastRound.FreeRider != null)
+                    {
+                        teams.Add(lastRound.FreeRider);
+                    }
+                }
+
+                if (teams.Count >= 2)
+                {
+                    newRound = new Round();
+                    //scrambled = scramble(teams.ToList());
+                    scrambled = teams.ToList();
+
+                    if (scrambled.Count % 2 != 0)
+                    {
+                        if (numberOfRounds > 0)
+                        {
+                            oldFreeRider = lastRound.FreeRider;
+                        }
+                        else
+                        {
+                            oldFreeRider = null;
+                        }
+
+                        int x = 0;
+                        Team newFreeRider;
+                        do
+                        {
+                            newFreeRider = scrambled[x];
+                            x++;
+                        } while (newFreeRider == oldFreeRider);
+
+                        newRound.FreeRider = newFreeRider;
+                        scrambled.Remove(newFreeRider);
+                    }
+
+                    for (int i = 0; i < scrambled.Count - 1; i += 2)
+                    {
+                        Match match = new Match();
+                        match.FirstOpponent = scrambled[i];
+                        match.SecondOpponent = scrambled[i + 1];
+                        newRound.AddMatch(match);
+                    }
+
+                    t.AddRound(newRound);
+
+                    if (printNewMatches) ShowScore(tournamentName);
+                }
+                else
+                {
+                    throw new Exception("TournamentIsFinished");
+                }
+            }
+            else
+            {
+                throw new Exception("RoundNotFinished");
+            }
         }
 
-        public void SaveMatch(string tournamentName, int roundNumber, string team1, string team2, string winningTeam)
+
+        private List<Team> scramble(List<Team> listToScramble)
         {
-            // Do not implement this method
+            Random randome = new Random();
+            for (int i = 0; i < listToScramble.Count; i++)
+            {
+                swap(ref listToScramble, i, randome.Next(0, listToScramble.Count - 1));
+            }
+            return listToScramble;
         }
+
+        private void swap(ref List<Team> list, int i, int v)
+        {
+            Team temp = list[i];
+            list[i] = list[v];
+            list[v] = temp;
+        }
+
+        public void SaveMatch(string tournamentName, int roundNumber, string winningTeam)
+        {
+            Tournament t = tournamentRepository.GetTournament(tournamentName);
+            Round r = t.GetRound(roundNumber);
+            Match m = r.GetMatch(winningTeam);
+            if (m != null && m.Winner == null)
+            {
+                Team w = t.GetTeam(winningTeam);
+                Console.WriteLine($"Kampen mellem {m.FirstOpponent} og {m.SecondOpponent} i runde {roundNumber} i turneringen {tournamentName} er nu afviklet.Vinderen blev {winningTeam}.");
+                m.Winner = w;
+            }
+            else
+            {
+                Console.WriteLine($"Holdet {winningTeam} kan ikke være vinder i runde 2, da holdet enten ikke deltager i runde 2 eller kampen allerede er registreret med en vinder.");
+            }
+        } 
+
     }
 }
