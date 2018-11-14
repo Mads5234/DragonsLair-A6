@@ -93,19 +93,19 @@ namespace DragonsLair
             }
 
         }
-        private static void AddPlayers()
+        private void AddPlayers()
         {
 
             Console.WriteLine("Angiv holdnavn");
             Players.TeamName();
             Console.WriteLine("angiv spiller 1");
-
+            Players.TeamName();
             Console.WriteLine("angiv spiller 2");
-
+            Players.TeamName();
             Console.WriteLine("angiv spiller 3");
-
+            Players.TeamName();
             Console.WriteLine("angiv spiller 4");
-
+            Players.TeamName();
             Console.WriteLine("Hold færdigt");
         }
         private void ViewTeamList()

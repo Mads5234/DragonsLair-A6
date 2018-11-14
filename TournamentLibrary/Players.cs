@@ -9,18 +9,34 @@ namespace TournamentLibrary
 {
     public class Players
     {
+        
         public static void TeamName()
         {
-            using (StreamWriter writer = new StreamWriter("Teamlist.txt"))
+            String path = (@"..\..\TeamListNew.txt");
+            if (!File.Exists(path))
             {
-                String AH = Console.ReadLine();
-                writer.Write(AH);
+                using (StreamWriter writer = File.CreateText(path))
+                {
+                    String AH = Console.ReadLine();
+                    writer.Write(AH);
+                    writer.Close();
+                }
+            }
+            else
+            {
+                using (StreamWriter writer2 = new StreamWriter(path, true))
+                {
+                    String AH = Console.ReadLine();
+                    writer2.WriteLine();
+                    writer2.Write(AH);
+                    writer2.Close();
+                }
             }
         }
         public static void TeamReader()
         {
-            
-            using (StreamReader reader = new StreamReader("Teamlist.txt"))
+            String path = (@"..\..\TeamListNew.txt");
+            using (StreamReader reader = new StreamReader(path))
             {
                 while (reader.EndOfStream == false)
                 {
