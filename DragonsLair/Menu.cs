@@ -27,6 +27,9 @@ namespace DragonsLair
                     case "3":
                         SaveMatch();
                         break;
+                    case "4":
+                        AddPlayers();
+                        break;
                     default:
                         Console.WriteLine("Ugyldigt valg.");
                         Console.ReadLine();
@@ -82,6 +85,20 @@ namespace DragonsLair
                 control.SaveMatch(tournamentName, round, winner);
             }
 
+        }
+        private void AddPlayers()
+        {
+            Console.WriteLine("Angiv holdnavn");
+
+            Console.WriteLine("angiv spiller 1");
+
+            Console.WriteLine("angiv spiller 2");
+
+            Console.WriteLine("angiv spiller 3");
+
+            Console.WriteLine("angiv spiller 4");
+
+            Console.WriteLine("Hold færdigt");
         }
     }
 }
