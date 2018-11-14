@@ -1,4 +1,6 @@
 ﻿using System;
+using TournamentLibrary;
+using System.IO;
 
 namespace DragonsLair
 {
@@ -91,10 +93,11 @@ namespace DragonsLair
             }
 
         }
-        private void AddPlayers()
+        private static void AddPlayers()
         {
-            Console.WriteLine("Angiv holdnavn");
 
+            Console.WriteLine("Angiv holdnavn");
+            Players.TeamName();
             Console.WriteLine("angiv spiller 1");
 
             Console.WriteLine("angiv spiller 2");
@@ -107,7 +110,11 @@ namespace DragonsLair
         }
         private void ViewTeamList()
         {
-            Console.WriteLine("angiv Turnering");
+            Console.Write("Angiv navn på turnering: ");
+            string tournamentName = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Hold for VinterTurnering");
+            Players.TeamReader();
         }
     }
 }
