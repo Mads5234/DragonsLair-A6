@@ -30,6 +30,9 @@ namespace DragonsLair
                     case "4":
                         AddPlayers();
                         break;
+                    case "5":
+                        ViewTeamList();
+                        break;
                     default:
                         Console.WriteLine("Ugyldigt valg.");
                         Console.ReadLine();
@@ -45,6 +48,8 @@ namespace DragonsLair
             Console.WriteLine("1. Præsenter turneringsstilling");
             Console.WriteLine("2. Planlæg runde i turnering");
             Console.WriteLine("3. Registrér afviklet kamp");
+            Console.WriteLine("4. Tilføj spillere til hold");
+            Console.WriteLine("5. Se liste over hold");
             Console.WriteLine("");
             Console.WriteLine("0. Exit");
         }
@@ -99,6 +104,10 @@ namespace DragonsLair
             Console.WriteLine("angiv spiller 4");
 
             Console.WriteLine("Hold færdigt");
+        }
+        private void ViewTeamList()
+        {
+            Console.WriteLine("angiv Turnering");
         }
     }
 }
