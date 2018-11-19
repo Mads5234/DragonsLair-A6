@@ -46,5 +46,22 @@ namespace TournamentLibrary
                 reader.Close();
             }
         }
+        public static void TeamModifier()
+        {
+            Console.WriteLine("Hvad vil du ændre?");
+            string textA = Console.ReadLine();
+            Console.WriteLine("hvad skal det ændres til?");
+            string textB = Console.ReadLine();
+
+            String path = (@"..\..\TeamListNew.txt");
+            StreamReader reader = new StreamReader(File.OpenRead(path));
+            string fileContent = reader.ReadToEnd();
+            reader.Close();
+
+            fileContent = fileContent.Replace(textA, textB);
+            StreamWriter writer = new StreamWriter(File.OpenWrite(path));
+            writer.Write(fileContent);
+            writer.Close();
+        }
     }
 }

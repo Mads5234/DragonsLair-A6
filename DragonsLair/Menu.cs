@@ -35,6 +35,9 @@ namespace DragonsLair
                     case "5":
                         ViewTeamList();
                         break;
+                    case "6":
+                        ModifyTeam();
+                        break;
                     default:
                         Console.WriteLine("Ugyldigt valg.");
                         Console.ReadLine();
@@ -52,6 +55,7 @@ namespace DragonsLair
             Console.WriteLine("3. Registrér afviklet kamp");
             Console.WriteLine("4. Tilføj spillere til hold");
             Console.WriteLine("5. Se liste over hold");
+            Console.WriteLine("6. Ændre holdlist");
             Console.WriteLine("");
             Console.WriteLine("0. Exit");
         }
@@ -115,6 +119,11 @@ namespace DragonsLair
             Console.Clear();
             Console.WriteLine("Hold for VinterTurnering");
             Players.TeamReader();
+        }
+        private void ModifyTeam()
+        {
+            Players.TeamReader();
+            Players.TeamModifier();
         }
     }
 }
